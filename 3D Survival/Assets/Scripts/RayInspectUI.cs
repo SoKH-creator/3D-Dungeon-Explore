@@ -33,8 +33,8 @@ public class RayInspectUI : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, inspectMask, QueryTriggerInteraction.Ignore))
         {
             // Try to get an Inspectable component from the hit object or its parents
-            if (hit.collider.TryGetComponent<Inspectable>(out var info) ||
-                hit.collider.GetComponentInParent<Inspectable>() != null && (info = hit.collider.GetComponentInParent<Inspectable>()) != null)
+            var info = hit.collider.GetComponentInParent<Inspectable>();
+            if (info != null)
             {
                 // Update UI with object info
                 if (nameText) nameText.text = info.displayName;
